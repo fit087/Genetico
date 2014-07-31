@@ -1,26 +1,19 @@
-function [xbest,fxbest,FES]= PSO_func(fhd,Dimension,Particle_Number,Max_Gen,VRmin,VRmax,varargin)
-
-% clear all; %close all;
-% clc
+clear all; %close all;
+clc
  %Function to be minimized
-% D=2;
-
-D=Dimension;
+D=2;
 % objf=inline('4*x1^2-2.1*x1^4+(x1^6)/3+x1*x2-4*x2^2+4*x2^4','x1','x2');
 % objf=vectorize(objf);
 
-% objf=3; %Função Objetivo. Função Fi
+objf=3; %Função Objetivo. Função Fi
 
 % objf=cec14_func([3.3253000e+000, -1.2835000e+000]', 1)
 
 
 %Initialization of DE parameters
-% N=20; %population size (total function evaluations will be itmax*N, must be >=5)
-N=Particle_Number;
+N=20; %population size (total function evaluations will be itmax*N, must be >=5)
 % itmax=30; 
-% itmax=10000*D/N;
-itmax=Max_Gen;
-
+itmax=10000*D/N;
 F=0.8; CR=0.5; %mutation and crossover ratio
 
 %Problem bounds
@@ -30,9 +23,7 @@ F=0.8; CR=0.5; %mutation and crossover ratio
 % a(1:N,1)=-100; b(1:N,1)=100; %bounds on variable x1
 % a(1:N,2)=-100; b(1:N,2)=100; %bounds on variable x2
 
-% a(1:N,1:D)=-100; b(1:N,1:D)=100; %bounds on variable x***
-
-a(1:N,1:D)=VRmin; b(1:N,1:D)=VRmax; %bounds on variable x***
+a(1:N,1:D)=-100; b(1:N,1:D)=100; %bounds on variable x***
 
 
 
@@ -50,24 +41,23 @@ x=a+d.*rand(N,D);
 
 % fx=cec14_func([x(:,:)]', objf);
 
-% fx=cec14_func(x', objf);
-
-fx=feval(fhd,x',varargin{:});
-
+fx=cec14_func(x', objf);
 FES=N;
 
 %Find best 
 [fxbest,ixbest]=min(fx);        %Retorna o minimo dos individuos e a posição do mesmo
 xbest=x(ixbest,1:D);            %Pega o melhor individuo con todos os gene
 
+%**************************************************************************
 it=2;
 erro=1;
+%**************************************************************************
 
 %Iterate
 % for it=2:itmax;
     
     while(it<=itmax&abs(erro)>10^-8)
-        
+    
 	permat=bsxfun(@(x,y) x(randperm(y(1))),basemat',N(ones(N,1)))';
 	%Generate donors by mutation
 	v(1:N,1:D)=repmat(xbest,N,1)+F*(x(permat(1:N,1),1:D)-x(permat(1:N,2),1:D));
@@ -81,10 +71,7 @@ u(1:N,1:D)=x(1:N,1:D).*mux(1:N,1:D)+v(1:N,1:D).*muv(1:N,1:D);
 
 % fu=cec14_func([u(:,1),u(:,2)]', objf);
 
-% fu=cec14_func(u', objf);
-
-fu=feval(fhd,u',varargin{:});
-
+fu=cec14_func(u', objf);
 FES=FES+N;
 
 idx=fu<fx;
@@ -98,7 +85,6 @@ xbest=x(ixbest,1:D);
         it=it+1;
         erro=fxbest-300;
 %         *****************************************************************
-
 
 end %end loop on iterations
 xbest
@@ -118,4 +104,3 @@ FES
 %  T = uitable(FES,xbest,fxbest)
 
 % T = table(FES=FES,xbest=xbest,fxbest=fxbest)
-end
