@@ -27,7 +27,7 @@ for i=3:3
     func_num=i;
     for j=1:runs
         i,j,
-        [gbest,gbestval,FES]= PSO_func(fhd,D,pop_size,iter_max,Xmin,Xmax,...
+        [gbest,gbestval,FES]= DE_func(fhd,D,pop_size,iter_max,Xmin,Xmax,...
         func_num);
         xbest(j,:)=gbest;
         fbest(i,j)=gbestval;

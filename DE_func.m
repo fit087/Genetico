@@ -1,4 +1,4 @@
-function [xbest,fxbest,FES]= PSO_func(fhd,Dimension,Particle_Number,Max_Gen,VRmin,VRmax,varargin)
+function [xbest,fxbest,FES]= DE_func(fhd,Dimension,Particle_Number,Max_Gen,VRmin,VRmax,varargin)
 
 % clear all; %close all;
 % clc
