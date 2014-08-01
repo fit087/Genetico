@@ -8,7 +8,16 @@
 clear
 %_______________________________________________________
 % I. Setup the GA
-ff='testfunction'; % objective function
+% ff='testfunction'; % objective function
+
+% ff=@(x) x.^2;
+
+% ff=str2func('8*x - 0.25*x^2');
+
+ff=inline('8*x - 0.25*x^2');
+
+% y = 8*x - 0.25*power(x,2);
+
 % ff=str2func('cec14_func');% objective function_______________________________________
 
 npar=2; % number of optimization variables
