@@ -4,7 +4,7 @@ clc
 % f= cec14_func([3.3253000e+000, -1.2835000e+000]', 1) Assim, obtevesse um
 % valor
 func_num=1;
-D=2;
+D=30;
 Xmin=-100;
 Xmax=100;
 pop_size=20;
@@ -23,7 +23,7 @@ fhd=str2func('cec14_func');
 
 % xbest(runs,D)=0;
 
-for i=3:3
+for i=5:5
     func_num=i;
     for j=1:runs
         i,j,
@@ -55,7 +55,7 @@ for i=3:3
     
 %     cabezalho=['Best' 'Worst'];
 %         cabezalho=['Best', 'Worst'];
-    cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn'};
+    cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn','Differential Evolution'};
 
     xlswrite(filename,cabezalho)
     xlswrite(filename,best,'A2:A2');

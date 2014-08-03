@@ -55,7 +55,7 @@ for i=5:5
     
 %     cabezalho=['Best' 'Worst'];
 %         cabezalho=['Best', 'Worst'];
-    cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn'};
+    cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn','PSO'};
 
     xlswrite(filename,cabezalho)
     xlswrite(filename,best,'A2:A2');
