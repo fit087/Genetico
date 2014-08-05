@@ -1,4 +1,4 @@
-function [gbest,gbestval,fitcount,beschi,media]= PSO_func(fhd,Dimension,Particle_Number,Max_Gen,VRmin,VRmax,varargin)
+function [gbest,gbestval,fitcount,beschi]= PSO_func(fhd,Dimension,Particle_Number,Max_Gen,VRmin,VRmax,varargin)
 %[gbest,gbestval,fitcount]= PSO_func('f8',3500,200000,30,30,-5.12,5.12)
 rand('state',sum(100*clock));
 me=Max_Gen;
@@ -22,7 +22,6 @@ e=feval(fhd,pos',varargin{:});
 
 % ******************************
 beschi(me)=0;
-media(me)=0;
 % ******************************
 
 fitcount=ps;
@@ -33,7 +32,6 @@ pbestval=e; %initialize the pbest and the pbest's fitness value
 
 % ******************************
 beschi(1)=gbestval;
-media(1)=mean(pbestval);
 % ******************************
 
 

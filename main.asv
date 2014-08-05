@@ -94,11 +94,8 @@ mediaplot=mean(media)/1;
  hold on;
  plot(mediaplot,'r')
  
- cabezalho={'Melhor', 'Media'};
-
-    xlswrite(filename,cabezalho)
  xlswrite(filename,melhorplot','Desempenho');
- xlswrite(filename,mediaplot','Desempenho','B1');
+ xlswrite(filename,mediaplot','Desempenho',B);
 %  xlswrite(filename,mediaplot,'media');
  
  
