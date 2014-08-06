@@ -27,7 +27,7 @@ for i=3:3
     func_num=i;
     for j=1:runs
         i,j,
-        [gbest,gbestval,FES]= DE_func(fhd,D,pop_size,iter_max,Xmin,Xmax,...
+        [gbest,gbestval,FES,melhor(j,:),media(j,:)]= DE_func(fhd,D,pop_size,iter_max,Xmin,Xmax,...
         func_num);
         xbest(j,:)=gbest;
         fbest(i,j)=gbestval;
@@ -54,7 +54,7 @@ for i=3:3
     hist(fbest(i,:))
     
 %     cabezalho=['Best' 'Worst'];
-%         cabezalho=['Best', 'Worst'];
+
     cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn','Differencial Evolution'};
 
     xlswrite(filename,cabezalho)
@@ -74,6 +74,20 @@ for i=3:3
     
 end
 
+
+melhorplot=mean(melhor)*1;
+mediaplot=mean(media)/1;
+plot(melhorplot(1:FES/pop_size))
+grid on;
+axis([0 FES/pop_size 0 5000])
+hold on;
+plot(mediaplot(1:FES/pop_size),'r')
+ 
+cabezalho={'Melhor', 'Media'};
+
+xlswrite(filename,cabezalho,'Desempenho')
+xlswrite(filename,melhorplot','Desempenho','A2');
+xlswrite(filename,mediaplot','Desempenho','B2');
 
 
 % for i=1:30

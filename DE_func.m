@@ -1,4 +1,4 @@
-function [xbest,fxbest,FES]= DE_func(fhd,Dimension,Particle_Number,Max_Gen,VRmin,VRmax,varargin)
+function [xbest,fxbest,FES,beschi,media]= DE_func(fhd,Dimension,Particle_Number,Max_Gen,VRmin,VRmax,varargin)
 
 % clear all; %close all;
 % clc
@@ -56,9 +56,19 @@ fx=feval(fhd,x',varargin{:});
 
 FES=N;
 
+% ******************************
+beschi(itmax)=0;
+media(itmax)=0;
+% ******************************
+
 %Find best 
 [fxbest,ixbest]=min(fx);        %Retorna o minimo dos individuos e a posição do mesmo
 xbest=x(ixbest,1:D);            %Pega o melhor individuo con todos os gene
+
+% ******************************
+beschi(1)=fxbest;
+media(1)=mean(fx);
+% ******************************
 
 it=2;
 erro=1;
@@ -85,6 +95,11 @@ u(1:N,1:D)=x(1:N,1:D).*mux(1:N,1:D)+v(1:N,1:D).*muv(1:N,1:D);
 
 fu=feval(fhd,u',varargin{:});
 
+minimoDaFuncao=300;
+if varargin{:}==5
+    minimoDaFuncao=500;
+end
+
 FES=FES+N;
 
 idx=fu<fx;
@@ -94,9 +109,14 @@ x(idx,1:D)=u(idx,1:D);
 [fxbest,ixbest]=min(fx);
 xbest=x(ixbest,1:D);
 
+%         ***************************************
+        beschi(it)=fxbest;            %guarda num vector os melhores
+        media(it)=mean(fx);
+%         ***************************************
+
 %         *****************************************************************
         it=it+1;
-        erro=fxbest-300;
+        erro=fxbest-minimoDaFuncao;
 %         *****************************************************************
 
 
