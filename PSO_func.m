@@ -56,6 +56,8 @@ erro=1;
 
 % for i=2:me
     while(i<=me&abs(erro)>10^-8)
+        
+%     while(abs(erro)>10^-8)
 
         aa=cc(1).*rand(ps,D).*(pbest-pos)+cc(2).*rand(ps,D).*(gbestrep-pos);
         vel=iwt(i).*vel+aa;

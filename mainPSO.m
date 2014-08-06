@@ -1,21 +1,22 @@
 clear all
 clc
-% mex cec14_func.cpp -DWINDOWS
-% f= cec14_func([3.3253000e+000, -1.2835000e+000]', 1) Assim, obtevesse um
-% valor
+
 func_num=1;
 D=2;
 Xmin=-100;
 Xmax=100;
 pop_size=100;
 
+% ******** FES ***************
 % iter_max=5000
 
 % iter_max=100/pop_size*D;
 
 iter_max=10000/pop_size*D;
 
+% iter_max=100000000;
 % iter_max=10000*D;
+% ****** END FES **************
 
 runs=51;
 
@@ -54,7 +55,7 @@ for i=3:3
     hist(fbest(i,:))
     
 %     cabezalho=['Best' 'Worst'];
-%         cabezalho=['Best', 'Worst'];
+
     cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn','PS0'};
 
     xlswrite(filename,cabezalho)
@@ -88,20 +89,23 @@ end
  
 melhorplot=mean(melhor)*1;
 mediaplot=mean(media)/1;
- plot(melhorplot)
- grid on;
-  axis([0 200 0 5000])
- hold on;
- plot(mediaplot,'r')
+plot(melhorplot)
+grid on;
+axis([0 200 0 5000])
+hold on;
+plot(mediaplot,'r')
  
- cabezalho={'Melhor', 'Media'};
+cabezalho={'Melhor', 'Media'};
 
- xlswrite(filename,cabezalho,'Desempenho')
- xlswrite(filename,melhorplot','Desempenho','A2');
- xlswrite(filename,mediaplot','Desempenho','B2');
+xlswrite(filename,cabezalho,'Desempenho')
+xlswrite(filename,melhorplot','Desempenho','A2');
+xlswrite(filename,mediaplot','Desempenho','B2');
 %  xlswrite(filename,mediaplot,'media');
  
- 
+ % mex cec14_func.cpp -DWINDOWS
+% f= cec14_func([3.3253000e+000, -1.2835000e+000]', 1) Assim, obtevesse um
+% valor
+
  
 % for i=1:30
 % eval(['load input_data/shift_data_' num2str(i) '.txt']);
