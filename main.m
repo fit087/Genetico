@@ -55,7 +55,7 @@ for i=3:3
     
 %     cabezalho=['Best' 'Worst'];
 %         cabezalho=['Best', 'Worst'];
-    cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn'};
+    cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn','PS0'};
 
     xlswrite(filename,cabezalho)
     xlswrite(filename,best,'A2:A2');
@@ -96,9 +96,9 @@ mediaplot=mean(media)/1;
  
  cabezalho={'Melhor', 'Media'};
 
-    xlswrite(filename,cabezalho)
- xlswrite(filename,melhorplot','Desempenho');
- xlswrite(filename,mediaplot','Desempenho','B1');
+ xlswrite(filename,cabezalho,'Desempenho')
+ xlswrite(filename,melhorplot','Desempenho','A2');
+ xlswrite(filename,mediaplot','Desempenho','B2');
 %  xlswrite(filename,mediaplot,'media');
  
  
