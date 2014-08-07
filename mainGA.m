@@ -7,7 +7,7 @@ func_num=1;
 D=2;
 Xmin=-100;
 Xmax=100;
-pop_size=12;
+pop_size=20;
 
 % iter_max=5000
 
@@ -59,9 +59,10 @@ for i=3:3
     hold on
     plot(fbest(i,:),'r')
     hold off
+    pause();
 %     figure();
     hist(fbest(i,:))
-    
+    pause();
 %     cabezalho=['Best' 'Worst'];
 %         cabezalho=['Best', 'Worst'];
     cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn','GA'};
