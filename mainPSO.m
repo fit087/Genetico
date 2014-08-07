@@ -91,7 +91,7 @@ melhorplot=mean(melhor)*1;
 mediaplot=mean(media)/1;
 plot(melhorplot)
 grid on;
-axis([0 200 0 5000])
+axis([0 FES/pop_size 0 5000])
 hold on;
 plot(mediaplot,'r')
  
