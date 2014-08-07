@@ -7,7 +7,7 @@ func_num=1;
 D=2;
 Xmin=-100;
 Xmax=100;
-pop_size=20;
+pop_size=12;
 
 % iter_max=5000
 
@@ -36,7 +36,8 @@ for i=3:3
         i,j,
 %         [gbest,gbestval,FES]= DE_func(fhd,D,pop_size,iter_max,Xmin,Xmax,...
 %         func_num);
-    [gbest,gbestval]=ga(fhd,D)
+%     [gbest,gbestval]=ga(fhd,D)
+[xbest,fxbest,FES,beschi,media]=GAcont_func(fhd,D,pop_size,iter_max,Xmin,Xmax,func_num);
         xbest(j,:)=gbest;
         fbest(i,j)=gbestval;
         fbest(i,j)
