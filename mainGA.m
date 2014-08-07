@@ -37,7 +37,7 @@ for i=3:3
 %         [gbest,gbestval,FES]= DE_func(fhd,D,pop_size,iter_max,Xmin,Xmax,...
 %         func_num);
 %     [gbest,gbestval]=ga(fhd,D)
-[xbest,fxbest,FES,beschi,media]=GAcont_func(fhd,D,pop_size,iter_max,Xmin,Xmax,func_num);
+[gbest,gbestval,FES,melhor(j,:),media(j,:)]=GAcont_func(fhd,D,pop_size,iter_max,Xmin,Xmax,func_num);
         xbest(j,:)=gbest;
         fbest(i,j)=gbestval;
         fbest(i,j)
@@ -83,7 +83,20 @@ for i=3:3
     
 end
 
+melhorplot=mean(melhor)*1;
+mediaplot=mean(media)/1;
+plot(melhorplot)
+grid on;
+% axis([0 FES/pop_size 0 5000])
+hold on;
+plot(mediaplot,'r')
+ 
+cabezalho={'Melhor', 'Media'};
 
+xlswrite(filename,cabezalho,'Desempenho')
+xlswrite(filename,melhorplot','Desempenho','A2');
+xlswrite(filename,mediaplot','Desempenho','B2');
+%  xlswrite(filename,mediaplot,'media');
 
 % for i=1:30
 % eval(['load input_data/shift_data_' num2str(i) '.txt']);

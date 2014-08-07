@@ -6,6 +6,20 @@ function [xbest,fxbest,FES,beschi,media]= GAcont_func(fhd,Dimension,Particle_Num
 % I, II, and III
 % Haupt & Haupt
 % 2003
+
+% ________________________________________________________
+%------------------ ADOLFO CORREA-------------------------
+% ________________________________________________________
+% FES           nro. de avalições
+
+% _______Grafico de desempenho____
+% beschi        vetor(1,iteraçoesMaximas) guarda the best de cada iteração
+% media         vetor(1,iteraçoesMaximas) guarda a media da população de
+%               cada iteração.
+% ________________________________
+
+
+% ________________________________________________________
 %_______________________________________________________
 % I Setup the GA
 
@@ -41,13 +55,34 @@ par=(varhi-varlo)*rand(popsize,npar)+varlo; % random
 % using ff
 % e=feval(fhd,pos',varargin{:});
 cost=feval(ff,par',varargin{:});
-[cost,ind]=sort(cost); % min cost in element 1
-par=par(ind,:); % sort continuous
-minc(1)=min(cost); % minc contains min of
-meanc(1)=mean(cost); % meanc contains mean of population
+FES=popsize;
+
+% ******************************
+minimoDaFuncao=300;
+if varargin{:}==5
+    minimoDaFuncao=500;
+end
+
+% ******************************
+% ******************************
+beschi(floor(maxit))=0;
+media(floor(maxit))=0;
+% ******************************
+
+[cost,ind]=sort(cost);  % min cost in element 1
+par=par(ind,:);         % sort continuous
+minc(1)=min(cost);      % minc contains min of
+meanc(1)=mean(cost);    % meanc contains mean of population
+
+% ******************************
+beschi(1)=minc(1);
+media(1)=meanc(1);
+% ******************************
+
 %_______________________________________________________
 % Iterate through generations
-while iga<maxit
+while iga<floor(maxit)-1            %Verificar melhor, pois esta matando o
+%                                    primeiro ponto
 iga=iga+1; % increments generation counter
 %_______________________________________________________
 % Pair and mate
@@ -106,6 +141,7 @@ end % ii
 % The new offspring and mutated chromosomes are 
 % evaluated
 % cost=feval(ff,par);
+FES=FES+popsize;
 cost=feval(ff,par',varargin{:});
 %_______________________________________________________
 % Sort the costs and associated parameters
@@ -115,12 +151,18 @@ par=par(ind,:);
 % Do statistics for a single nonaveraging run
 minc(iga+1)=min(cost);
 meanc(iga+1)=mean(cost);
+
+% ******************************
+beschi(iga+1)=minc(iga+1);
+media(iga+1)=meanc(iga+1);
+% ******************************
+
 %_______________________________________________________
 % Stopping criteria
 if iga>maxit | cost(1)<mincost
 break
 end
-if abs(cost(1)-500)<10E-8
+if abs(cost(1)-minimoDaFuncao)<10E-8
     break
 end
 
@@ -149,11 +191,7 @@ text(0,minc(1),'best');text(1,minc(2),'populationaverage')
 % Return
 xbest=par(1,:);
 fxbest=cost(1);
-FES=1;
-beschi=1;
-media=1;
-
-
-
-
+% FES=1;
+% beschi=1;
+% media=1;
 end
