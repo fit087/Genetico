@@ -20,6 +20,16 @@ function [xbest,fxbest,FES,beschi,media]= GAcont_func(fhd,Dimension,Particle_Num
 
 
 % ________________________________________________________
+
+% persistent par
+
+% evalin('base','who');
+
+% global par;
+
+
+
+
 %_______________________________________________________
 % I Setup the GA
 
@@ -39,8 +49,8 @@ mincost=-9999999; % minimum cost
 % III GA parameters
 popsize=Particle_Number; % set population size
 % mutrate=.2; % set mutation rate
-mutrate=.2; % set mutation rate
-selection=0.5; % fraction of population kept
+mutrate=.5; % set mutation rate
+selection=0.9; % fraction of population kept
 Nt=npar; % continuous parameter GA Nt=#variables
 keep=floor(selection*popsize); % #population
 % members that survive
@@ -51,6 +61,16 @@ M=ceil((popsize-keep)/2); % number of matings
 % Create the initial population
 iga=0; % generation counter initialized
 par=(varhi-varlo)*rand(popsize,npar)+varlo; % random
+
+
+
+% assignin('base','Coordpto', par);
+
+% evalin('base', 'cola', par);
+
+
+
+
 % cost=feval(ff,par); % calculates population cost 
 % using ff
 % e=feval(fhd,pos',varargin{:});
@@ -123,10 +143,37 @@ par(keep+ix(ic),xp(ic))=par(ma(ic),xp(ic))-r(ic).*xy;
 par(keep+ix(ic)+1,xp(ic))=par(pa(ic),xp(ic))+r(ic).*xy;
 % 2nd
 if xp(ic)<npar % crossover when last variable not selected
-par(keep+ix(ic),:)=[par(keep+ix(ic),1:xp(ic))
-par(keep+ix(ic)+1,xp(ic)+1:npar)];
-par(keep+ix(ic)+1,:)=[par(keep+ix(ic)+1,1:xp(ic))
-par(keep+ix(ic),xp(ic)+1:npar)];
+
+% % %     fprintf('xp=',xp(ic),'ic=',ic,'npar',npar);
+% % xp(ic)<npar
+% % xp
+% % ic
+% % npar
+% % ix
+% % 
+% % par(keep+ix(ic),1:xp(ic))
+% % par(keep+ix(ic)+1,xp(ic)+1:npar)
+% % 
+% % [par(keep+ix(ic),1:xp(ic)) par(keep+ix(ic)+1,xp(ic)+1:npar)];
+% % 
+% %     assignin('base','Coordpto', par);
+% %     
+% % %      assignin('base','xp', xp, 'ic', ic);
+% % 
+% % assignin('base','xp', xp);%);, 
+% % 
+% % assignin('base','ic', ic);
+    
+% par(keep+ix(ic),:)=[par(keep+ix(ic),1:xp(ic))
+% par(keep+ix(ic),:)=[par(keep+ix(ic),1:xp(ic))
+% par(keep+ix(ic)+1,xp(ic)+1:npar)];
+% par(keep+ix(ic)+1,:)=[par(keep+ix(ic)+1,1:xp(ic))
+% par(keep+ix(ic),xp(ic)+1:npar)];
+
+par(keep+ix(ic),:)=[par(keep+ix(ic),1:xp(ic)) par(keep+ix(ic)+1,xp(ic)+1:npar)];
+par(keep+ix(ic)+1,:)=[par(keep+ix(ic)+1,1:xp(ic)) par(keep+ix(ic),xp(ic)+1:npar)];
+
+
 end % if
 end
 %_______________________________________________________

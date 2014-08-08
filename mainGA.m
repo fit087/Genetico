@@ -1,5 +1,17 @@
+%Program mainGA
+% This program call a GA's function many times (runs-times) and do a mean
+% of the results and take the best of them.
+
+% =====================Adolfo Correa=======================================
+% -Variables List----------------------------------------------------------
+% best              The best optimus of 'runs'=51 runs (escalar)
+% worst             The worst optimus of 'runs'=51 runs (escalar)
+% Orden             organization of all optimus values
+% median            a mediana dos otimos ordenados
+
 clear all
 clc
+close();
 % mex cec14_func.cpp -DWINDOWS
 % f= cec14_func([3.3253000e+000, -1.2835000e+000]', 1) Assim, obtevesse um
 % valor
@@ -7,15 +19,13 @@ func_num=1;
 D=2;
 Xmin=-100;
 Xmax=100;
-pop_size=20;
+% pop_size=12;
+% pop_size=20;
+pop_size=50;
 
-% iter_max=5000
-
-% iter_max=100/pop_size*D;
 
 iter_max=10000/pop_size*D;
 
-% iter_max=10000*D;
 
 runs=51;
 
@@ -34,26 +44,26 @@ for i=3:3
     func_num=i;
     for j=1:runs
         i,j,
-%         [gbest,gbestval,FES]= DE_func(fhd,D,pop_size,iter_max,Xmin,Xmax,...
-%         func_num);
-%     [gbest,gbestval]=ga(fhd,D)
 [gbest,gbestval,FES,melhor(j,:),media(j,:)]=GAcont_func(fhd,D,pop_size,iter_max,Xmin,Xmax,func_num);
-        xbest(j,:)=gbest;
-        fbest(i,j)=gbestval;
+
+        xbest(j,:)=gbest;                       %Vetor (runs) Coordenadas dos otimos
+        fbest(i,j)=gbestval;                    %Vetor (runs) valores dos otimos
         fbest(i,j)
         FES
     end
-    f_mean(i)=mean(fbest(i,:));
-    
-    filename='Resultados';
+    f_mean(i)=mean(fbest(i,:));                 %Media dos melhores valores
     
     
+    
+%     Valores da Tabelinha___________________
     best=min(fbest(i,:));
     worst=max(fbest(i,:));
     Orden=sort(fbest(i,:));
     sn_1=std(Orden);
     sn=std(Orden,1);
     median=Orden(26);
+ %   Final  Valores da Tabelinha___________________   
+    
     figure();
     plot(Orden)
     hold on
@@ -63,9 +73,12 @@ for i=3:3
 %     figure();
     hist(fbest(i,:))
     pause();
-%     cabezalho=['Best' 'Worst'];
-%         cabezalho=['Best', 'Worst'];
+    
+%     EXCEL dos Valores da Tabelinha___________________
+ 
     cabezalho={'Best', 'Worst','Median','Mean','Stdn-1','Stdn','GA'};
+    
+    filename='Resultados';
 
     xlswrite(filename,cabezalho)
     xlswrite(filename,best,'A2:A2');
@@ -75,20 +88,23 @@ for i=3:3
     xlswrite(filename,sn_1,'E2:E2');
     xlswrite(filename,sn,'F2:F2');
     
-    
-%     T = table(['M';'F';'M'],[45 45;41 32;40 34],...
-%     {'NY';'CA';'MA'},[true;false;false])
-
-% writetable(T,'myData.xls','Sheet',2,'Range','B2:F6')
-    
+%    Final EXCEL dos Valores da Tabelinha___________________
     
 end
 
+
+% melhorplot=melhor;
+% mediaplot=media;
+
 melhorplot=mean(melhor)*1;
-mediaplot=mean(media)/1;
+mediaplot=mean(media)/100000;
 plot(melhorplot)
 grid on;
-% axis([0 FES/pop_size 0 5000])
+% axis([0 FES/pop_size 0 50000])
+% xlim([0 FES/pop_size])
+ylim([0 20000])
+xlabel('iterações')
+ylabel('melhor valor e a media dos valores')
 hold on;
 plot(mediaplot,'r')
  
