@@ -50,7 +50,7 @@ mincost=-9999999; % minimum cost
 popsize=Particle_Number; % set population size
 % mutrate=.2; % set mutation rate
 mutrate=.5; % set mutation rate
-selection=0.9; % fraction of population kept
+selection=0.5; % fraction of population kept
 Nt=npar; % continuous parameter GA Nt=#variables
 keep=floor(selection*popsize); % #population
 % members that survive
