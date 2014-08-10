@@ -16,7 +16,7 @@ close();
 % f= cec14_func([3.3253000e+000, -1.2835000e+000]', 1) Assim, obtevesse um
 % valor
 func_num=1;
-D=2;
+D=30;
 Xmin=-100;
 Xmax=100;
 % pop_size=12;
@@ -40,7 +40,7 @@ fhd=@cec14_func;
 % numberOfVariables = 2;
 % [x,fval] = ga(FitnessFunction,numberOfVariables)
 
-for i=3:3
+for i=5:5
     func_num=i;
     for j=1:runs
         i,j,
@@ -48,6 +48,10 @@ for i=3:3
 
         xbest(j,:)=gbest;                       %Vetor (runs) Coordenadas dos otimos
         fbest(i,j)=gbestval;                    %Vetor (runs) valores dos otimos
+        
+        fprintf('\n\n')
+        disp('Saida do mainGA')
+        disp('fbest(i,j)')
         fbest(i,j)
         FES
     end

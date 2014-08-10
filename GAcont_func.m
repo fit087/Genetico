@@ -212,28 +212,29 @@ end
 if abs(cost(1)-minimoDaFuncao)<10E-8
     break
 end
-
+disp('Saida da funcao')
+disp('counter Optimo achado nessa iteracao')
 [iga cost(1)]
 end %iga
 %_______________________________________________________
 % Displays the output
-day=clock;
-disp(datestr(datenum(day(1),day(2),day(3),day(4),day(5),day(6)),0))
-% disp(['optimized function is ' ff])
- disp(['optimized function is cec14_func'])
-format short g
-disp(['popsize = ' num2str(popsize) ' mutrate = '...
-num2str(mutrate) ' # par = ' num2str(npar)])
-disp(['#generations=' num2str(iga) ' best cost='...
-num2str(cost(1))])
-disp(['best solution'])
-disp([num2str(par(1,:))])
-disp('continuous genetic algorithm')
-figure(24)
-iters=0:length(minc)-1;
-plot(iters,minc,iters,meanc,'-r');
-xlabel('generation');ylabel('cost');
-text(0,minc(1),'best');text(1,minc(2),'populationaverage')
+% day=clock;
+% disp(datestr(datenum(day(1),day(2),day(3),day(4),day(5),day(6)),0))
+% % disp(['optimized function is ' ff])
+%  disp(['optimized function is cec14_func'])
+% format short g
+% disp(['popsize = ' num2str(popsize) ' mutrate = '...
+% num2str(mutrate) ' # par = ' num2str(npar)])
+% disp(['#generations=' num2str(iga) ' best cost='...
+% num2str(cost(1))])
+% disp(['best solution'])
+% disp([num2str(par(1,:))])
+% disp('continuous genetic algorithm')
+% figure(24)
+% iters=0:length(minc)-1;
+% plot(iters,minc,iters,meanc,'-r');
+% xlabel('generation');ylabel('cost');
+% text(0,minc(1),'best');text(1,minc(2),'populationaverage')
 
 % Return
 xbest=par(1,:);
