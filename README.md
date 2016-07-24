@@ -11,3 +11,11 @@ Please put cec14_func.cpp and input_data folder with your algorithm in the same 
 f= cec14_func([3.3253000e+000, -1.2835000e+000]', 1)
 
 3. main.m is an example test code with PSO algorithm.
+
+## Link
+[CEC 2014][1]
+
+[Original Files][2]
+
+[1]:http://www.ntu.edu.sg/home/EPNSugan/index_files/CEC2014/CEC2014.htm
+[2]:http://web.mysites.ntu.edu.sg/epnsugan/PublicSite/Shared%20Documents/Forms/AllItems.aspx?RootFolder=%2fepnsugan%2fPublicSite%2fShared%20Documents%2fCEC-2014&FolderCTID=&View=%7bDAF31868-97D8-4779-AE49-9CEC4DC3F310%7d
