@@ -12,7 +12,7 @@ f= cec14_func([3.3253000e+000, -1.2835000e+000]', 1)
 
 3. main.m is an example test code with PSO algorithm.
 
-## Link
+## Links
 - [CEC 2014][1]
 
 - [Original Files][2]
